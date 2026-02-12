@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open Me ❤️</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main class="wrap">
+        <div class="card" aria-live="polite">
+            <!-- ENVELOPE VIEW -->
+            <section id="envelopeView" class="view is-active" aria-label="Envelope">
+                <div class="envelope" role="button" tabindex="0" aria-label="Open the envelope">
+                    <div class="env-back"></div>
+                    <div class="env-front"></div>
+                    <div class="env-flap"></div>
+
+                    <div class="heart" aria-hidden="true">
+                        <span class="heart-emoji">❤️</span>
+                        <span class="heart-text">Open me</span>
+                    </div>
+                </div>
+
+                <p class="hint">Tap the heart. I made this for you.</p>
+            </section>
+
+            <!-- LETTER VIEW -->
+            <section id="letterView" class="view" aria-label="Letter">
+                <article class="letter" role="article">
+                    <header class="letter-head">
+                        <h1>Hi love ❤️</h1>
+                        <p class="sub">I have one important question.</p>
+                    </header>
+
+                    <div class="letter-body">
+                        <h2 class="question">Will you be my Valentine?</h2>
+                        <p id="noLine" class="no-line" aria-live="polite"></p>
+
+                        <div class="btn-row">
+                            <button id="yesBtn" class="btn btn-yes" type="button">Yes</button>
+                            <button id="noBtn" class="btn btn-no" type="button">No</button>
+                        </div>
+                    </div>
+
+                    <footer class="letter-foot">
+                        <p class="tiny">Made with love. By me. For you.</p>
+                    </footer>
+                </article>
+
+                <!-- YES VIEW / GIF AREA -->
+                <section id="yesView" class="yes-area" aria-label="Celebration">
+                    <div class="yes-card">
+                        <h2>Yay. I knew it. ❤️</h2>
+                        <p>Now come here. I owe you a hug.</p>
+
+                        <!-- Option A: use a GIF URL -->
+                        <img id="gif" class="gif" alt="Celebration gif"
+                            src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" loading="lazy" />
+
+                        <button id="resetBtn" class="btn btn-soft" type="button">Replay</button>
+                    </div>
+                </section>
+            </section>
+        </div>
+
+        <p class="footer">
+            Tip. You can edit the text inside <span class="mono">index.html</span>.
+        </p>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
