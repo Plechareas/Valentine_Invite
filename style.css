@@ -349,3 +349,23 @@ body {
         transform: scale(1.08);
     }
 }
+
+/* Confetti canvas overlay */
+#confettiCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 50;
+    display: none;
+}
+
+#confettiCanvas.is-active {
+    display: block;
+}
+
+/* Hide choices smoothly */
+.is-hidden {
+    display: none;
+}

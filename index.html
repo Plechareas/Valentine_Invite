@@ -11,6 +11,7 @@
 <body>
     <main class="wrap">
         <div class="card" aria-live="polite">
+
             <!-- ENVELOPE VIEW -->
             <section id="envelopeView" class="view is-active" aria-label="Envelope">
                 <div class="envelope" role="button" tabindex="0" aria-label="Open the envelope">
@@ -29,6 +30,10 @@
 
             <!-- LETTER VIEW -->
             <section id="letterView" class="view" aria-label="Letter">
+
+                <!-- CONFETTI CANVAS -->
+                <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
                 <article class="letter" role="article">
                     <header class="letter-head">
                         <h1>Hi love ❤️</h1>
@@ -39,7 +44,8 @@
                         <h2 class="question">Will you be my Valentine?</h2>
                         <p id="noLine" class="no-line" aria-live="polite"></p>
 
-                        <div class="btn-row">
+                        <!-- WRAPPED BUTTONS -->
+                        <div id="choices" class="btn-row">
                             <button id="yesBtn" class="btn btn-yes" type="button">Yes</button>
                             <button id="noBtn" class="btn btn-no" type="button">No</button>
                         </div>
@@ -56,13 +62,13 @@
                         <h2>Yay. I knew it. ❤️</h2>
                         <p>Now come here. I owe you a hug.</p>
 
-                        <!-- Option A: use a GIF URL -->
                         <img id="gif" class="gif" alt="Celebration gif"
                             src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" loading="lazy" />
 
                         <button id="resetBtn" class="btn btn-soft" type="button">Replay</button>
                     </div>
                 </section>
+
             </section>
         </div>
 
@@ -70,6 +76,9 @@
             Tip. You can edit the text inside <span class="mono">index.html</span>.
         </p>
     </main>
+
+    <!-- MUSIC FILE (PUT song.mp3 IN SAME FOLDER) -->
+    <audio id="bgMusic" src="song.mp3" preload="auto"></audio>
 
     <script src="script.js"></script>
 </body>
