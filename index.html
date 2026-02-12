@@ -30,8 +30,6 @@
 
             <!-- LETTER VIEW -->
             <section id="letterView" class="view" aria-label="Letter">
-
-                <!-- CONFETTI CANVAS -->
                 <canvas id="confettiCanvas" aria-hidden="true"></canvas>
 
                 <article id="letterCard" class="letter" role="article">
@@ -62,21 +60,19 @@
                     </footer>
                 </article>
 
-                <!-- YES VIEW / GIF AREA -->
+                <!-- YES VIEW -->
                 <section id="yesView" class="yes-area" aria-label="Celebration">
-                    <div class="heart-stage" aria-hidden="true">
-                        <div class="big-heart">
+                    <div class="heart-stage">
+                        <div class="big-heart" aria-hidden="true">
                             <div class="big-heart-inner">
-                                <h2 class="yes-title">Yay ❤️</h2>
-
                                 <img id="gif" class="gif gif-in-heart" alt="Celebration gif"
                                     src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" loading="lazy" />
                             </div>
                         </div>
                     </div>
                 </section>
-
             </section>
+
         </div>
 
         <p class="footer">
@@ -84,6 +80,7 @@
         </p>
     </main>
 
+    <!-- Put song.mp3 in the same folder -->
     <audio id="bgMusic" src="song.mp3" preload="auto"></audio>
 
     <script src="script.js"></script>

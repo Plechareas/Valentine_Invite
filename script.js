@@ -7,7 +7,6 @@ const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const noLine = document.getElementById("noLine");
 
-const choices = document.getElementById("choices");
 const letterCard = document.getElementById("letterCard");
 const bgMusic = document.getElementById("bgMusic");
 
@@ -27,7 +26,7 @@ const funnyNoLines = [
 
 let noCount = 0;
 
-// Envelope -> Letter
+/* Envelope -> Letter */
 function showLetter() {
     envelope.classList.add("is-open");
     setTimeout(() => {
@@ -37,10 +36,9 @@ function showLetter() {
     }, 450);
 }
 
-// NO button
+/* No */
 function onNo() {
-    const line = funnyNoLines[noCount % funnyNoLines.length];
-    noLine.textContent = line;
+    noLine.textContent = funnyNoLines[noCount % funnyNoLines.length];
 
     noBtn.animate(
         [
@@ -55,19 +53,16 @@ function onNo() {
     noCount += 1;
 }
 
-// YES button
+/* Yes */
 async function onYes() {
     noLine.textContent = "";
 
-    // Hide buttons
-    choices.style.display = "none";
-
-    // Hide all letter text and card
+    // Hide entire letter
     letterCard.classList.add("is-hidden");
 
-    // Show only the heart + gif area
+    // Show heart + gif only
     yesView.classList.add("is-active");
-    yesView.scrollIntoView({ behavior: "smooth", block: "start" });
+    yesView.scrollIntoView({ behavior: "smooth", block: "center" });
 
     // Confetti
     startConfetti(2400);
@@ -78,7 +73,6 @@ async function onYes() {
         bgMusic.volume = 0.75;
         await bgMusic.play();
     } catch (e) {
-        // Some devices still block. Next click will start.
         const once = async () => {
             try { await bgMusic.play(); } catch (_) { }
             window.removeEventListener("pointerdown", once);
@@ -87,7 +81,7 @@ async function onYes() {
     }
 }
 
-// Confetti
+/* Confetti engine */
 let confettiRAF = null;
 let confettiPieces = [];
 let confettiEndAt = 0;
@@ -101,7 +95,7 @@ function resizeCanvas() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
-function spawnConfetti(count = 160) {
+function spawnConfetti(count = 170) {
     const w = window.innerWidth;
     const h = window.innerHeight;
 
@@ -187,7 +181,7 @@ window.addEventListener("resize", () => {
     if (confettiCanvas.classList.contains("is-active")) resizeCanvas();
 });
 
-// Events
+/* Events */
 envelope.addEventListener("click", showLetter);
 envelope.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") showLetter();
