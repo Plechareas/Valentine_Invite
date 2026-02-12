@@ -5,10 +5,10 @@ const yesView = document.getElementById("yesView");
 const envelope = document.querySelector(".envelope");
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
-const resetBtn = document.getElementById("resetBtn");
 const noLine = document.getElementById("noLine");
 
 const choices = document.getElementById("choices");
+const letterCard = document.getElementById("letterCard");
 const bgMusic = document.getElementById("bgMusic");
 
 const confettiCanvas = document.getElementById("confettiCanvas");
@@ -27,7 +27,7 @@ const funnyNoLines = [
 
 let noCount = 0;
 
-// -------------------- Envelope -> Letter --------------------
+// Envelope -> Letter
 function showLetter() {
     envelope.classList.add("is-open");
     setTimeout(() => {
@@ -37,7 +37,7 @@ function showLetter() {
     }, 450);
 }
 
-// -------------------- NO button --------------------
+// NO button
 function onNo() {
     const line = funnyNoLines[noCount % funnyNoLines.length];
     noLine.textContent = line;
@@ -55,35 +55,30 @@ function onNo() {
     noCount += 1;
 }
 
-// -------------------- YES button --------------------
+// YES button
 async function onYes() {
     noLine.textContent = "";
 
-    // Remove the Yes/No options
-    choices.classList.add("is-hidden");
+    // Hide buttons
+    choices.style.display = "none";
 
-    // Show only the gif area
+    // Hide all letter text and card
+    letterCard.classList.add("is-hidden");
+
+    // Show only the heart + gif area
     yesView.classList.add("is-active");
     yesView.scrollIntoView({ behavior: "smooth", block: "start" });
 
-    // Start confetti
-    startConfetti(2200);
+    // Confetti
+    startConfetti(2400);
 
-    // Start music (works because user clicked)
+    // Music
     try {
         bgMusic.currentTime = 0;
         bgMusic.volume = 0.75;
         await bgMusic.play();
     } catch (e) {
-        // Autoplay still might fail on some devices.
-        // If it fails, show a short hint inside the yes card.
-        const hint = document.createElement("p");
-        hint.textContent = "Tap the screen once to start the music.";
-        hint.style.marginTop = "10px";
-        hint.style.color = "rgba(255,255,255,.8)";
-        document.querySelector(".yes-card").appendChild(hint);
-
-        // Try again on next user interaction
+        // Some devices still block. Next click will start.
         const once = async () => {
             try { await bgMusic.play(); } catch (_) { }
             window.removeEventListener("pointerdown", once);
@@ -92,29 +87,7 @@ async function onYes() {
     }
 }
 
-// -------------------- Reset --------------------
-function resetAll() {
-    noCount = 0;
-    noLine.textContent = "";
-
-    yesView.classList.remove("is-active");
-    choices.classList.remove("is-hidden");
-
-    letterView.classList.remove("is-active");
-    envelopeView.classList.add("is-active");
-
-    envelope.classList.remove("is-open");
-
-    // stop music
-    if (bgMusic) {
-        bgMusic.pause();
-        bgMusic.currentTime = 0;
-    }
-
-    stopConfetti();
-}
-
-// -------------------- Confetti (no library) --------------------
+// Confetti
 let confettiRAF = null;
 let confettiPieces = [];
 let confettiEndAt = 0;
@@ -128,7 +101,7 @@ function resizeCanvas() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
-function spawnConfetti(count = 140) {
+function spawnConfetti(count = 160) {
     const w = window.innerWidth;
     const h = window.innerHeight;
 
@@ -147,7 +120,7 @@ function spawnConfetti(count = 140) {
             size,
             shape: shapes[Math.floor(Math.random() * shapes.length)],
             color: colors[Math.floor(Math.random() * colors.length)],
-            alpha: 0.9
+            alpha: 0.92
         };
     });
 }
@@ -162,9 +135,8 @@ function drawConfetti() {
         p.x += p.vx;
         p.y += p.vy;
         p.rot += p.vr;
-        p.vy += 0.03; // gravity
+        p.vy += 0.03;
 
-        // wrap a bit
         if (p.x < -40) p.x = w + 40;
         if (p.x > w + 40) p.x = -40;
 
@@ -185,7 +157,6 @@ function drawConfetti() {
         ctx.restore();
     }
 
-    // stop after duration
     if (performance.now() > confettiEndAt) {
         stopConfetti();
         return;
@@ -194,10 +165,10 @@ function drawConfetti() {
     confettiRAF = requestAnimationFrame(drawConfetti);
 }
 
-function startConfetti(durationMs = 2000) {
+function startConfetti(durationMs = 2200) {
     resizeCanvas();
     confettiCanvas.classList.add("is-active");
-    spawnConfetti(160);
+    spawnConfetti(170);
     confettiEndAt = performance.now() + durationMs;
 
     if (confettiRAF) cancelAnimationFrame(confettiRAF);
@@ -216,7 +187,7 @@ window.addEventListener("resize", () => {
     if (confettiCanvas.classList.contains("is-active")) resizeCanvas();
 });
 
-// -------------------- Events --------------------
+// Events
 envelope.addEventListener("click", showLetter);
 envelope.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") showLetter();
@@ -224,4 +195,3 @@ envelope.addEventListener("keydown", (e) => {
 
 noBtn.addEventListener("click", onNo);
 yesBtn.addEventListener("click", onYes);
-resetBtn.addEventListener("click", resetAll);

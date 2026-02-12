@@ -369,3 +369,184 @@ body {
 .is-hidden {
     display: none;
 }
+
+/* Center the button row */
+.btn-row-center {
+    justify-content: center;
+}
+
+/* More interesting buttons */
+.btn-fancy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 140px;
+    border-radius: 999px;
+    padding: 14px 18px;
+    position: relative;
+    transform: translateY(0);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .22);
+}
+
+.btn-fancy .btn-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.btn-fancy:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.03);
+}
+
+.btn-fancy:active {
+    transform: translateY(1px);
+}
+
+/* Extra glow for Yes */
+.btn-yes.btn-fancy {
+    box-shadow:
+        0 14px 40px rgba(0, 0, 0, .22),
+        0 0 0 1px rgba(255, 255, 255, .10),
+        0 0 30px rgba(255, 77, 136, .28);
+}
+
+/* Subtle shine sweep */
+.btn-fancy::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 999px;
+    background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, .25) 20%, transparent 45%);
+    transform: translateX(-120%);
+    transition: transform .65s ease;
+    pointer-events: none;
+    opacity: .35;
+}
+
+.btn-fancy:hover::after {
+    transform: translateX(120%);
+}
+
+/* Hide the whole letter after Yes */
+.letter.is-hidden {
+    display: none;
+}
+
+/* Heart background stage for the GIF */
+.heart-stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 0 10px;
+}
+
+.big-heart {
+    width: min(520px, 92vw);
+    aspect-ratio: 1 / 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: heartBeat 1.05s ease-in-out infinite;
+    filter: drop-shadow(0 22px 60px rgba(0, 0, 0, .40));
+}
+
+/* Heart shape */
+.big-heart::before,
+.big-heart::after {
+    content: "";
+    position: absolute;
+    width: 56%;
+    height: 56%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .30), rgba(255, 77, 136, .95) 55%, rgba(255, 77, 136, .88));
+    border-radius: 999px 999px 0 0;
+    top: 18%;
+}
+
+.big-heart::before {
+    left: 22%;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+
+.big-heart::after {
+    left: 22%;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+/* Inner container sits on top */
+.big-heart-inner {
+    position: relative;
+    z-index: 2;
+    width: 74%;
+    max-width: 360px;
+    text-align: center;
+    padding: 18px 14px 16px;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, .18);
+    border: 1px solid rgba(255, 255, 255, .12);
+    backdrop-filter: blur(8px);
+}
+
+.yes-title {
+    margin: 0 0 10px;
+    font-size: clamp(1.2rem, 3.2vw, 1.7rem);
+    color: rgba(255, 255, 255, .95);
+}
+
+/* Gif inside heart */
+.gif-in-heart {
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .35);
+}
+
+/* Make yes area fill attention more */
+.yes-area {
+    width: min(720px, 92vw);
+    margin: 18px auto 0;
+}
+
+/* Confetti canvas overlay */
+#confettiCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 50;
+    display: none;
+}
+
+#confettiCanvas.is-active {
+    display: block;
+}
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    22% {
+        transform: scale(1.06);
+    }
+
+    40% {
+        transform: scale(1.01);
+    }
+
+    62% {
+        transform: scale(1.08);
+    }
+
+    78% {
+        transform: scale(1.02);
+    }
+}
